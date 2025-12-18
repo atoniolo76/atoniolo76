@@ -1,5 +1,5 @@
 <script>
-	import KudosButton from '../components/KudosButton.svelte';
+	import KudosButton from '../../components/KudosButton.svelte';
 
 	let { data } = $props();
 	let post = $derived(data.post);
