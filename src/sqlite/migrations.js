@@ -30,10 +30,16 @@ export default [
 					url: '/about',
 					label: { text: 'About', annotations: [] }
 				},
+				nav_item_5: {
+					id: 'nav_item_5',
+					type: 'nav_item',
+					url: '/writing',
+					label: { text: 'Writing', annotations: [] }
+				},
 				nav_1: {
 					id: 'nav_1',
 					type: 'nav',
-					nav_items: ['nav_item_1', 'nav_item_2', 'nav_item_3', 'nav_item_4']
+					nav_items: ['nav_item_1', 'nav_item_2', 'nav_item_3', 'nav_item_4', 'nav_item_5']
 				}
 			}
 		};

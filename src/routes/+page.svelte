@@ -1,3 +1,12 @@
+<nav class="flex justify-center py-6 mb-8">
+  <div class="flex gap-8">
+    <a href="/" class="text-blue-600 font-medium">Home</a>
+    <a href="/writing" class="text-gray-700 hover:text-blue-600 transition-colors">Writing</a>
+    <a href="/projects" class="text-gray-700 hover:text-blue-600 transition-colors">Projects</a>
+    <a href="/about" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
+  </div>
+</nav>
+
 <div class="p-10">
   <h1 class="text-2xl font-bold">Alessio Toniolo</h1>
   <p class="pt-6">
