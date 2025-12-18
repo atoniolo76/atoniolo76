@@ -1,4 +1,6 @@
 <script>
+	import KudosButton from '../components/KudosButton.svelte';
+
 	// Mock data for now - in a real app, this would come from a CMS or file system
 	let posts = $state([
 		{
@@ -74,6 +76,11 @@
 							#{tag}
 						</span>
 					{/each}
+				</div>
+
+				<!-- Kudos Button for post preview -->
+				<div class="mt-4 pt-4 border-t border-gray-100">
+					<KudosButton postSlug={post.slug} />
 				</div>
 			</article>
 		{/each}

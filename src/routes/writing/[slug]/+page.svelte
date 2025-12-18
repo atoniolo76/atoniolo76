@@ -1,4 +1,6 @@
 <script>
+	import KudosButton from '../components/KudosButton.svelte';
+
 	let { data } = $props();
 	let post = $derived(data.post);
 
@@ -72,6 +74,16 @@
 		<!-- Simple markdown-like renderer -->
 		<div class="markdown-content">
 			{@html renderMarkdown(post.content)}
+		</div>
+
+		<!-- Kudos Button -->
+		<div class="mt-12 pt-8 border-t border-gray-200">
+			<div class="flex items-center justify-between">
+				<div class="text-sm text-gray-600">
+					Did you enjoy this post? Show some love!
+				</div>
+				<KudosButton postSlug={post.slug} />
+			</div>
 		</div>
 	</main>
 </div>

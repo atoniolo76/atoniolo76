@@ -5,15 +5,20 @@ let db = null;
 
 function getDb() {
 	if (!db) {
-		//const DB_PATH = private_env.DB_PATH || './data/db.sqlite';
-		// Only initialize database in development or when explicitly needed
-		// Skip during Cloudflare Pages build process
-		if (process.env.NODE_ENV === 'development' || process.env.RUN_MIGRATIONS === 'true') {
-			console.log("initializing database");
+		try {
+			// In Cloudflare Pages, always use in-memory database
+			console.log("Initializing in-memory database for Cloudflare");
 			db = new DatabaseSync(':memory:', {
 				// enableForeignKeyConstraints: true
 			});
-		} 
+		} catch (error) {
+			console.error("Database initialization failed:", error);
+			// Fallback to mock database if SQLite fails
+			db = {
+				exec: () => {},
+				prepare: () => ({ get: () => null, run: () => {}, all: () => [] })
+			};
+		}
 	}
 	return db;
 }
