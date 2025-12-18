@@ -9,4 +9,121 @@
       @atoniolo76
     </a>.
   </p>
+
+  <!-- Builder Checker -->
+  <div class="mt-12 max-w-md">
+    <div class="flex gap-2">
+      <input
+        bind:value={url}
+        type="url"
+        placeholder="Enter LinkedIn or GitHub URL"
+        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+      />
+      <button
+        onclick={checkBuilder}
+        disabled={loading}
+        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+      >
+        {#if loading}
+          <span class="flex items-center gap-2">
+            <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Checking...
+          </span>
+        {:else}
+          Builder?
+        {/if}
+      </button>
+    </div>
+
+    {#if result !== null}
+      <div
+        class="mt-4 p-4 rounded-lg text-center font-bold text-lg transition-all duration-300 {result ? 'bg-green-100 text-green-800 border-2 border-green-300' : 'bg-red-100 text-red-800 border-2 border-red-300'}"
+        class:flash={showFlash}
+      >
+        {result ? 'YES! 🚀' : 'NO 😔'}
+      </div>
+    {/if}
+
+    {#if error}
+      <div class="mt-4 p-4 bg-red-100 text-red-800 rounded-lg border-2 border-red-300">
+        {error}
+      </div>
+    {/if}
+  </div>
 </div>
+
+<script>
+  let url = $state('');
+  let loading = $state(false);
+  let result = $state(null);
+  let error = $state('');
+  let showFlash = $state(false);
+
+  async function checkBuilder() {
+    if (!url.trim()) {
+      error = 'Please enter a URL';
+      return;
+    }
+
+    // Basic validation
+    try {
+      const urlObj = new URL(url);
+      if (!urlObj.hostname.includes('linkedin.com') && !urlObj.hostname.includes('github.com')) {
+        error = 'Only LinkedIn and GitHub URLs are allowed';
+        return;
+      }
+    } catch {
+      error = 'Please enter a valid URL';
+      return;
+    }
+
+    loading = true;
+    error = '';
+    result = null;
+    showFlash = false;
+
+    try {
+      const response = await fetch('/api/check-builder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ url })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to check');
+      }
+
+      result = data.isBuilder;
+      showFlash = true;
+
+      // Remove flash effect after animation
+      setTimeout(() => {
+        showFlash = false;
+      }, 2000);
+
+    } catch (err) {
+      error = err.message || 'Something went wrong';
+    } finally {
+      loading = false;
+    }
+  }
+</script>
+
+<style>
+  .flash {
+    animation: flash 0.5s ease-in-out;
+  }
+
+  @keyframes flash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+</style>
