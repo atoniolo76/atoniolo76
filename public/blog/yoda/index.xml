@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yoda on My Hugo Site</title>
+    <link>http://localhost:1313/blog/yoda/</link>
+    <description>Recent content in Yoda on My Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>en-US</language>
+    <copyright>Copyright © 2024, Alessio Toniolo.</copyright>
+    <lastBuildDate>Sat, 17 Jan 2026 22:41:02 +0530</lastBuildDate>
+    <atom:link href="http://localhost:1313/blog/yoda/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Yoda and R2K2</title>
+      <link>http://localhost:1313/yoda-and-r2k2/</link>
+      <pubDate>Sat, 17 Jan 2026 22:41:02 +0530</pubDate>
+      <guid>http://localhost:1313/yoda-and-r2k2/</guid>
+      <description>&lt;h2 id=&#34;the-yoda-r2k2-connection&#34;&gt;The Yoda-R2K2 Connection&lt;/h2&gt;&#xA;&lt;p&gt;I recently adapted vLLM with my friend &lt;a href=&#34;https://romethorstenson.com&#34;&gt;Rome Thorstenson&lt;/a&gt; to serve LoRA adapters for Kimi K2 thinking. The objective was to see if Kimi K2 could speak like Yoda—master Yoda, that is. Just as R2-D2 (the beloved astromech droid) connects characters across the Star Wars universe, R2K2 represents the technical bridge enabling this linguistic transformation.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-technical-challenge&#34;&gt;The Technical Challenge&lt;/h2&gt;&#xA;&lt;p&gt;Since there are so many experts (384 to be exact) in this one-trillion parameter model, we faced a critical memory constraint. The original shared memory kernel couldn&amp;rsquo;t create a buffer of length 384, which simply doesn&amp;rsquo;t fit in standard CUDA shared memory. Our solution was to rewrite the kernel to iterate through token sorting instead of allocating large contiguous buffers.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
