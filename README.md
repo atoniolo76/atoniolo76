@@ -1,2 +1,2 @@
 # atoniolo76
-![Alessio's GitHub stats](https://github-readme-stats.vercel.app/api?username=atoniolo76&show_icons=true&theme=transparent)
+Hey! I'm interested in distributed systems, LLM load balancing/inference, and networking on multi-node GPU clusters.
